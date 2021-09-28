@@ -1,0 +1,5 @@
+micronaut:
+  application:
+    name: it-website-backend
+  server:
+    port: 8088
