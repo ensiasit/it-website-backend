@@ -1,0 +1,20 @@
+name: Deploy to server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.GCP_VM_IP_ADDRESS }}
+          username: ${{ secrets.GCP_VM_SSH_USERNAME }}
+          key: ${{ secrets.GCP_VM_SSH_KEY }}
+          script: |
+            docker container rm -f it-website-backend
+            docker container run --name it-website-backend -p 80:8088 --pull always ghcr.io/ensiasit/it-website-backend/it-website-backend:latest
