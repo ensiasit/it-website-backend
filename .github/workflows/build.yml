@@ -1,7 +1,8 @@
 name: Build image
 on:
   push:
-    branches: [ master ]
+    branches:
+      - develop
 
 env:
   IMAGE_NAME: it-website-backend
